@@ -5,7 +5,7 @@ export const actions = {
     const formData = await request.formData();
     const name = formData.get('name');
 
-    const res = addCategory(name);
+    const res = await addCategory(name);
 
     return res;
   }

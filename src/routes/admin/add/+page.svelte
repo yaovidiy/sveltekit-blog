@@ -7,6 +7,12 @@
 
 <div class="container-md pt-5">
 	<div class="row justify-content-center">
+		{#if form?.success}
+			<p class="alert alert-success">Успішно додано нову статю. <a href="/admin">Перейти на Дашборд</a></p>
+		{/if}
+		{#if form?.success === false}
+			<p class="alert alert-danger">Сталася помилка при додавані статті</p>
+		{/if}
 		<form method="post" class="card col-12 col-md-6 p-0">
 			<div class="card-header text-center"><h1>Додати нову статтю</h1></div>
 			<div class="card-body">
@@ -23,7 +29,12 @@
 					<span class="invalid-feedback">Обов'язково до заповнення</span>
 				</div>
 				<div class="form-floating mb-3">
-					<select name="categoryId" class="form-select" id="floatingSelect" aria-label="Категорія статті">
+					<select
+						name="categoryId"
+						class="form-select"
+						id="floatingSelect"
+						aria-label="Категорія статті"
+					>
 						<option selected>Оберіть категорію</option>
 						{#each data.categories as category}
 							<option value={category.rowid}>{category.name}</option>
@@ -39,7 +50,6 @@
 						name="status"
 						id="success-outlined"
 						autocomplete="off"
-						checked
 						value="1"
 					/>
 					<label class="btn btn-outline-success col-12 col-md-6" for="success-outlined"
@@ -51,13 +61,14 @@
 						class="btn-check"
 						name="status"
 						id="danger-outlined"
+						checked
 						autocomplete="off"
 						value="0"
 					/>
 					<label class="btn btn-outline-danger col-12 col-md-5" for="danger-outlined"
 						>Не активна</label
 					>
-					<input type="hidden" name="description" value="Some value">
+					<input type="hidden" name="description" value="Some value" />
 				</div>
 
 				<button class="btn btn-primary w-100">Додати</button>

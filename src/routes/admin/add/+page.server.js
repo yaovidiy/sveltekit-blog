@@ -17,7 +17,7 @@ export const actions = {
 			categoryID: formData.get('categoryId'),
 			status: formData.get('status')
 		};
-		const res = addArticle(data);
+		const res = await addArticle(data);
 
 		return {
 			success: res

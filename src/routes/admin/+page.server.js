@@ -1,6 +1,6 @@
 import { auth } from '$lib/server/lucia';
 import { dbExist } from '$lib/server/db/init';
-import { getAllArticles } from '$lib/server/db/articles.js';
+import { getAllArticles, deleteArticle } from '$lib/server/db/articles.js';
 import { fail, redirect } from '@sveltejs/kit';
 
 export const load = async ({ locals }) => {
@@ -25,5 +25,20 @@ export const actions = {
 		await auth.invalidateSession(session.sessionId); // invalidate session
 		locals.auth.setSession(null); // remove cookie
 		throw redirect(302, '/signin'); // redirect to login page
+	},
+	deleteArticle: async ({request}) => {
+		try {
+			const formData = await request.formData();
+			const rowid = formData.get('rowid');
+			const res = await deleteArticle(rowid);
+
+			return {
+				deleted: res
+			};
+		} catch (err) {
+			return {
+				deleted: false
+			};
+		}
 	}
 };

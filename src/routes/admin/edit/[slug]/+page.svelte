@@ -2,12 +2,11 @@
 	export let data;
 	export let form;
 
-	console.log(data);
 </script>
 
 <div class="container-md pt-5">
 	{#if form?.success}
-		<p class="alert alert-success">Успішно відредаговано</p>
+		<p class="alert alert-success">Успішно відредаговано <a href="/admin">Перейти на Дашборд</a></p>
 	{/if}
 	{#if form?.success === false}
 		<p class="alert alert-danger">Помилка при редагуванні</p>
