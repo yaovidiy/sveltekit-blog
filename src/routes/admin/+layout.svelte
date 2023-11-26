@@ -27,13 +27,10 @@
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="/admin">Дашборд</a>
+					<a class="nav-link active" aria-current="page" href="/admin">Статті</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/admin/add">Додати статтю</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/admin/cat/add">Додати категорію</a>
+					<a class="nav-link" href="/admin/cat">Категорії</a>
 				</li>
 				<li class="nav-item dropdown">
 					<a
