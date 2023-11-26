@@ -1,3 +1,10 @@
+<script>
+	export let data;
+	export let form;
+
+	console.log(data);
+</script>
+
 <div class="container-md pt-5">
 	<div class="row justify-content-center">
 		<form method="post" class="card col-12 col-md-6 p-0">
@@ -16,11 +23,11 @@
 					<span class="invalid-feedback">Обов'язково до заповнення</span>
 				</div>
 				<div class="form-floating mb-3">
-					<select class="form-select" id="floatingSelect" aria-label="Категорія статті">
+					<select name="categoryId" class="form-select" id="floatingSelect" aria-label="Категорія статті">
 						<option selected>Оберіть категорію</option>
-						<option value="1">Техніка</option>
-						<option value="2">Технології</option>
-						<option value="3">Подорожі</option>
+						{#each data.categories as category}
+							<option value={category.rowid}>{category.name}</option>
+						{/each}
 					</select>
 					<label for="floatingSelect">Категорія</label>
 				</div>
@@ -50,6 +57,7 @@
 					<label class="btn btn-outline-danger col-12 col-md-5" for="danger-outlined"
 						>Не активна</label
 					>
+					<input type="hidden" name="description" value="Some value">
 				</div>
 
 				<button class="btn btn-primary w-100">Додати</button>

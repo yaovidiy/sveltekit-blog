@@ -1,55 +1,28 @@
 <script>
 	export let data;
 
-	const dummyArticles = [
-		{
-			rowId: 1,
-			title: 'Some title',
-			category: 'Some category',
-			status: 1
-		},
-		{
-			rowId: 2,
-			title: 'Some title',
-			category: 'Some category',
-			status: 1
-		},
-		{
-			rowId: 3,
-			title: 'Some title',
-			category: 'Some category',
-			status: 1
-		},
-		{
-			rowId: 4,
-			title: 'Some title',
-			category: 'Some category',
-			status: 0
-		},
-		{
-			rowId: 5,
-			title: 'Some title',
-			category: 'Some category',
-			status: 1
-		},
-		{
-			rowId: 6,
-			title: 'Some title',
-			category: 'Some category',
-			status: 0
-		},
-		{
-			rowId: 7,
-			title: 'Some title',
-			category: 'Some category',
-			status: 0
+	async function initDataBase() {
+		try {
+			const apiResp = await fetch('/api/init-db', {
+				method: 'POST'
+			});
+
+			if (!apiResp.ok) {
+				throw new Error(`error: ${apiResp.status} ${apiResp.statusText}`);
+			}
+
+			const apiRes = await apiResp.json();
+
+			console.log(apiRes);
+		} catch (err) {
+			console.log(err);
 		}
-	];
+	}
+	console.log(data);
 </script>
 
-{#if data?.inited?.lenght}
+{#if data?.inited?.length}
 	<div class="container-md pt-5">
-		{JSON.stringify(data?.inited)}
 		<h1>Список статтей</h1>
 		<div class="table-responsive">
 			<table class="table table-striped">
@@ -63,9 +36,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					{#each dummyArticles as article}
+					{#each data.articles as article}
 						<tr>
-							<td><a href="/admin/edit/{article.rowId}">{article.rowId}</a></td>
+							<td><a href="/admin/edit/{article.rowId}">{article.rowid}</a></td>
 							<td>{article.title}</td>
 							<td>{article.category}</td>
 							<td style:color={article.status ? 'green' : 'red'}
@@ -94,7 +67,7 @@
 {:else}
 	<div class="container-md">
 		<div class="row pt-5 justify-content-center">
-			<button class="btn btn-primary" style="max-width: 250px; min-height: 50px;"
+			<button on:click={initDataBase} class="btn btn-primary" style="max-width: 250px; min-height: 50px;"
 				>Ініціалізувати базу данних</button
 			>
 		</div>
