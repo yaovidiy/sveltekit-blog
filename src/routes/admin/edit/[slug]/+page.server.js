@@ -21,7 +21,6 @@ export const actions = {
 				rowid: formData.get('rowid'),
 				description: ''
 			};
-      console.log(data);
 			const res = await updateOneArticle(data);
 
 			return {

@@ -52,7 +52,7 @@
 							<tr>
 								<td><a href="/admin/edit/{article.rowid}">{article.rowid}</a></td>
 								<td>{article.title}</td>
-								<td>{article.category}</td>
+								<td>{article.category ?? 'Категорія не обрана'}</td>
 								<td style:color={article.status ? 'green' : 'red'}
 									>{article.status ? 'Active' : 'Inactive'}</td
 								>

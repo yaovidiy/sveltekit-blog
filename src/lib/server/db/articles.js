@@ -19,13 +19,12 @@ const db = new Database(BLOG_DB_PATH);
  */
 export async function getAllArticles() {
 	try {
-		const sql = `SELECT a.rowid, title, categoryID, status, c.name as category FROM articles AS a INNER JOIN categories AS c ON a.categoryID = c.rowid`;
+		const sql = `SELECT a.rowid, title, categoryID, status, c.name as category FROM articles AS a LEFT JOIN categories AS c ON a.categoryID = c.rowid`;
 
 		const prepare = db.prepare(sql);
 
 		const res = prepare.all();
 
-		console.log(res);
 		return res;
 	} catch (err) {
 		console.log(err);
@@ -40,13 +39,11 @@ export async function getAllArticles() {
  */
 export async function addArticle(data) {
 	try {
-		console.log(data);
 		const sql =
 			'INSERT INTO articles (title, categoryID, status) VALUES (@title, @categoryID, @status)';
 		const prepare = db.prepare(sql);
-		const result = prepare.run(data);
+		prepare.run(data);
 
-		console.log(result);
 		return true;
 	} catch (err) {
 		console.log(err);
@@ -63,9 +60,8 @@ export async function updateOneArticle(data) {
 	try {
 		const sql =
 			'UPDATE articles SET title = @title, status = @status, categoryID = @categoryID, description = @description WHERE rowid = @rowid';
-		const result = db.prepare(sql).run(data);
+		db.prepare(sql).run(data);
 
-		console.log(result);
 		return true;
 	} catch (err) {
 		console.log(err);

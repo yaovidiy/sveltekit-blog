@@ -13,7 +13,7 @@
 	{#if data.categories.length > 0}
 		<div class="row justify-content-between align-items-center">
 			<h1 style="width: 50%;">Список статтей</h1>
-			<a href="/admin/add" class="btn btn-primary" style="max-width: 250px; max-height: 40px"
+			<a href="/admin/cat/add" class="btn btn-primary" style="max-width: 250px; max-height: 40px"
 				>Додати нову категорію</a
 			>
 		</div>
@@ -32,7 +32,7 @@
 							<td><a href="/admin/cat/edit/{category.rowid}">{category.rowid}</a></td>
 							<td>{category.name}</td>
 							<td>
-								<form action="?/deletecategory" method="post" class="deleteForm">
+								<form action="?/deleteCategory" method="post" class="deleteForm">
 									<input type="hidden" name="rowid" value={category.rowid} />
 									<button class="icon" href="!#">
 										<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"
