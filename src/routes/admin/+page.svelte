@@ -38,7 +38,7 @@
 				<tbody>
 					{#each data.articles as article}
 						<tr>
-							<td><a href="/admin/edit/{article.rowId}">{article.rowid}</a></td>
+							<td><a href="/admin/edit/{article.rowid}">{article.rowid}</a></td>
 							<td>{article.title}</td>
 							<td>{article.category}</td>
 							<td style:color={article.status ? 'green' : 'red'}
