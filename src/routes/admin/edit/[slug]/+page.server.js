@@ -19,7 +19,8 @@ export const actions = {
 				categoryID: formData.get('categoryId'),
 				status: formData.get('status'),
 				rowid: formData.get('rowid'),
-				description: ''
+				description: '',
+				thumbnail: formData.get('image')
 			};
 			const res = await updateOneArticle(data);
 

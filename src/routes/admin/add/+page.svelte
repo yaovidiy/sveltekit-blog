@@ -6,12 +6,14 @@
 <div class="container-md pt-5">
 	<div class="row justify-content-center">
 		{#if form?.success}
-			<p class="alert alert-success">Успішно додано нову статю. <a href="/admin">Перейти на Дашборд</a></p>
+			<p class="alert alert-success">
+				Успішно додано нову статю. <a href="/admin">Перейти на Дашборд</a>
+			</p>
 		{/if}
 		{#if form?.success === false}
 			<p class="alert alert-danger">Сталася помилка при додавані статті</p>
 		{/if}
-		<form method="post" class="card col-12 col-md-6 p-0">
+		<form method="post" enctype="multipart/form-data" class="card col-12 col-md-6 p-0">
 			<div class="card-header text-center"><h1>Додати нову статтю</h1></div>
 			<div class="card-body">
 				<div class="form-floating mb-3 w-100">
@@ -39,6 +41,10 @@
 						{/each}
 					</select>
 					<label for="floatingSelect">Категорія</label>
+				</div>
+				<div class="mb-3">
+					<label for="image" class="form-label">Мініатюра</label>
+					<input class="form-control" accept="image/*" name="image" type="file" id="image" />
 				</div>
 				<div class="mb-3 row gap-2 pe-3 ps-3">
 					<h5 class="col-12 text-center">Статус</h5>

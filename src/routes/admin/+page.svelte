@@ -2,6 +2,7 @@
 	export let data;
 	export let form;
 
+	console.log(data.articles);
 	async function initDataBase() {
 		try {
 			const apiResp = await fetch('/api/init-db', {
@@ -41,6 +42,7 @@
 					<thead>
 						<tr>
 							<th>#</th>
+							<th>Мініатюра</th>
 							<th>Заголовок</th>
 							<th>Категорія</th>
 							<th>Статус</th>
@@ -51,6 +53,14 @@
 						{#each data.articles as article}
 							<tr>
 								<td><a href="/admin/edit/{article.rowid}">{article.rowid}</a></td>
+								<td
+									><img
+										src={article.thumbnail}
+										alt={`Мініатюра ${article.title}`}
+										width="100"
+										height="50"
+									/></td
+								>
 								<td>{article.title}</td>
 								<td>{article.category ?? 'Категорія не обрана'}</td>
 								<td style:color={article.status ? 'green' : 'red'}
@@ -62,6 +72,7 @@
 										<button class="icon" href="!#">
 											<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"
 												><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+												<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
 												<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
 												<style>
 													svg {

@@ -5,7 +5,7 @@ const db = new Database(BLOG_DB_PATH);
 
 export async function init() {
 	const articles =
-		'CREATE TABLE IF NOT EXISTS articles (title text, categoryID int, status int, description text)';
+		'CREATE TABLE IF NOT EXISTS articles (title text, categoryID int, status int, description text, thumbnail text)';
 
 	const categories = `CREATE TABLE IF NOT EXISTS categories (name text)`;
 	const articlesDB = db.prepare(articles).run();

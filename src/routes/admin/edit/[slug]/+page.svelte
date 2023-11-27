@@ -1,7 +1,6 @@
 <script>
 	export let data;
 	export let form;
-
 </script>
 
 <div class="container-md pt-5">
@@ -13,7 +12,7 @@
 	{/if}
 	<div class="row justify-content-center">
 		<form method="post" class="card col-12 col-md-6 p-0">
-			<div class="card-header text-center"><h1>Додати нову статтю</h1></div>
+			<div class="card-header text-center"><h1>Оновити статтю</h1></div>
 			<div class="card-body">
 				<div class="form-floating mb-3 w-100">
 					<input
@@ -42,6 +41,15 @@
 						{/each}
 					</select>
 					<label for="floatingSelect">Категорія</label>
+				</div>
+				<div class="mb-3 d-flex justify-content-center">
+					{#if data.article.thumbnail}
+					<img src={`/${data.article.thumbnail}`} width="100" height="50" alt={`мініатюра ${data.article.title}`}>
+					<input type="hidden" name="image" value={data.article.thumbnail} />
+					{:else}
+					<label for="image" class="form-label">Мініатюра</label>
+					<input class="form-control" accept="image/*" name="image" type="file" id="image" />
+					{/if}
 				</div>
 				<div class="mb-3 row gap-2 pe-3 ps-3">
 					<h5 class="col-12 text-center">Статус</h5>

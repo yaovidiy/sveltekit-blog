@@ -57,9 +57,9 @@
 		</div>
 	{:else}
 		<div class="row pt-5 justify-content-center">
-			<p class="text-center">Не має статтей</p>
-			<a href="/admin/add" class="btn btn-primary" style="max-width: 250px; min-height: 50px;"
-				>Додайте свою першу статтю</a
+			<p class="text-center">Не має категорій</p>
+			<a href="/admin/cat/add" class="btn btn-primary" style="max-width: 250px; min-height: 50px;"
+				>Додайте свою першу категорію</a
 			>
 		</div>
 	{/if}

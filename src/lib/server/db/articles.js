@@ -9,17 +9,17 @@ const db = new Database(BLOG_DB_PATH);
  * @property {string} title
  * @property {number} categoryID - foreng key to categories table
  * @property {number} status - 0 - disabled 1 - active
- * @property {string} [description] - can be empty 
+ * @property {string} [description] - can be empty
+ * @property {string} [thumbnail]
  */
 
-
 /**
- * 
+ *
  * @returns {ArticleType[]}
  */
 export async function getAllArticles() {
 	try {
-		const sql = `SELECT a.rowid, title, categoryID, status, c.name as category FROM articles AS a LEFT JOIN categories AS c ON a.categoryID = c.rowid`;
+		const sql = `SELECT a.rowid, title, categoryID, status, c.name as category, thumbnail FROM articles AS a LEFT JOIN categories AS c ON a.categoryID = c.rowid`;
 
 		const prepare = db.prepare(sql);
 
@@ -33,14 +33,14 @@ export async function getAllArticles() {
 }
 
 /**
- * 
- * @param {ArticleType} data 
+ *
+ * @param {ArticleType} data
  * @returns {boolean}
  */
 export async function addArticle(data) {
 	try {
 		const sql =
-			'INSERT INTO articles (title, categoryID, status) VALUES (@title, @categoryID, @status)';
+			'INSERT INTO articles (title, categoryID, status, thumbnail) VALUES (@title, @categoryID, @status, @thumbnail)';
 		const prepare = db.prepare(sql);
 		prepare.run(data);
 
@@ -52,14 +52,14 @@ export async function addArticle(data) {
 }
 
 /**
- * 
- * @param {ArticleType} data 
+ *
+ * @param {ArticleType} data
  * @returns {boolean}
  */
 export async function updateOneArticle(data) {
 	try {
 		const sql =
-			'UPDATE articles SET title = @title, status = @status, categoryID = @categoryID, description = @description WHERE rowid = @rowid';
+			'UPDATE articles SET title = @title, thumbnail = @thumbnail, status = @status, categoryID = @categoryID, description = @description WHERE rowid = @rowid';
 		db.prepare(sql).run(data);
 
 		return true;
@@ -70,8 +70,8 @@ export async function updateOneArticle(data) {
 }
 
 /**
- * 
- * @param {number} id 
+ *
+ * @param {number} id
  * @returns {ArticleType}
  */
 export async function getOneArticle(id) {
@@ -87,8 +87,8 @@ export async function getOneArticle(id) {
 }
 
 /**
- * 
- * @param {number} id 
+ *
+ * @param {number} id
  * @returns {boolean}
  */
 export async function deleteArticle(id) {
