@@ -1,6 +1,8 @@
 <script>
 	export let data;
 	export let form;
+
+	let isReplacingImage = false;
 </script>
 
 <div class="container-md pt-5">
@@ -11,7 +13,7 @@
 		<p class="alert alert-danger">Помилка при редагуванні</p>
 	{/if}
 	<div class="row justify-content-center">
-		<form method="post" class="card col-12 col-md-6 p-0">
+		<form method="post" enctype="multipart/form-data" class="card col-12 col-md-6 p-0">
 			<div class="card-header text-center"><h1>Оновити статтю</h1></div>
 			<div class="card-body">
 				<div class="form-floating mb-3 w-100">
@@ -42,13 +44,23 @@
 					</select>
 					<label for="floatingSelect">Категорія</label>
 				</div>
-				<div class="mb-3 d-flex justify-content-center">
-					{#if data.article.thumbnail}
-					<img src={`/${data.article.thumbnail}`} width="100" height="50" alt={`мініатюра ${data.article.title}`}>
-					<input type="hidden" name="image" value={data.article.thumbnail} />
+				<div class="mb-3 d-flex gap-2 justify-content-center align-items-center">
+					{#if data.article.thumbnail && !isReplacingImage}
+						<img
+							src={`/${data.article.thumbnail}`}
+							width="120"
+							height="50"
+							alt={`мініатюра ${data.article.title}`}
+						/>
+						<input type="hidden" name="image" value={data.article.thumbnail} />
+						<button
+							on:click={() => (isReplacingImage = true)}
+							class="btn btn-danger"
+							style="max-width: 120px; max-height: 40px">Замініти</button
+						>
 					{:else}
-					<label for="image" class="form-label">Мініатюра</label>
-					<input class="form-control" accept="image/*" name="image" type="file" id="image" />
+						<label for="image" class="form-label mb-0">Мініатюра</label>
+						<input class="form-control" accept="image/*" name="image" type="file" id="image" />
 					{/if}
 				</div>
 				<div class="mb-3 row gap-2 pe-3 ps-3">

@@ -55,7 +55,7 @@
 								<td><a href="/admin/edit/{article.rowid}">{article.rowid}</a></td>
 								<td
 									><img
-										src={article.thumbnail}
+										src={`/${article.thumbnail}`}
 										alt={`Мініатюра ${article.title}`}
 										width="100"
 										height="50"
