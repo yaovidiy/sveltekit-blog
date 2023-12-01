@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
-data/*
+data/*.db
+data/*.sqlite
 static/uploads/*
 /build
 /.svelte-kit
