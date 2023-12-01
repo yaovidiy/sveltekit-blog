@@ -5,8 +5,18 @@
 		: new Promise(() => {});
 
 	if (browser) {
-		document.addEventListener('trix-attachment-add', (e) => {
+		document.addEventListener('trix-attachment-add', async (e) => {
 			console.log(e);
+
+			const formData = new FormData();
+			formData.set('file', e.attachment.attachment.file);
+			const resp = await fetch('/api/upload-file', {
+				method: 'POST',
+				body: formData
+			});
+			const attributes = await resp.json();
+
+			e.attachment.attachment.setAttributes(attributes);
 		});
 	}
 </script>
