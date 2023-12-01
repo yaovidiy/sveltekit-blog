@@ -13,20 +13,26 @@ export async function load() {
 
 export const actions = {
 	default: async ({ request }) => {
-		const formData = await request.formData();
-		const uploadedFile = formData.get('image');
-		const filename = `static/uploads/${crypto.randomUUID()}${extname(uploadedFile?.name)}`;
-		await writeFile(filename, Buffer.from(await uploadedFile?.arrayBuffer()));
-		const data = {
-			title: formData.get('title'),
-			categoryID: formData.get('categoryId'),
-			status: formData.get('status'),
-			thumbnail: filename.replace('static/', '')
-		};
-		const res = await addArticle(data);
+		try {
+			const formData = await request.formData();
+			const uploadedFile = formData.get('image');
+			const filename = `static/uploads/${crypto.randomUUID()}${extname(uploadedFile?.name)}`;
+			await writeFile(filename, Buffer.from(await uploadedFile?.arrayBuffer()));
+			const data = {
+				title: formData.get('title'),
+				categoryID: formData.get('categoryId'),
+				status: formData.get('status'),
+				thumbnail: filename.replace('static/', '')
+			};
+			const res = await addArticle(data);
 
-		return {
-			success: res
-		};
+			return {
+				success: res
+			};
+		} catch (err) {
+			return {
+				success: false
+			};
+		}
 	}
 };
