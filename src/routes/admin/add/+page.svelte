@@ -1,4 +1,6 @@
 <script>
+	import RichText from '$lib/components/RichText/RichText.svelte';
+
 	export let data;
 	export let form;
 </script>
@@ -45,6 +47,9 @@
 				<div class="mb-3">
 					<label for="image" class="form-label">Мініатюра</label>
 					<input class="form-control" accept="image/*" name="image" type="file" id="image" />
+				</div>
+				<div class="mb-3">
+					<RichText></RichText>
 				</div>
 				<div class="mb-3 row gap-2 pe-3 ps-3">
 					<h5 class="col-12 text-center">Статус</h5>
