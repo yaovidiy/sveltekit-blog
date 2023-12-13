@@ -4,7 +4,7 @@ import { getOneArticle, updateOneArticle } from '$lib/server/db/articles.js';
 import { getAllCategories } from '$lib/server/db/categories.js';
 
 export async function load({ params }) {
-	const articleData = await getOneArticle(params.slug);
+	const articleData = await getOneArticle(parseInt(params.slug));
 	const allCats = await getAllCategories();
 	return {
 		article: articleData,
@@ -25,9 +25,9 @@ export const actions = {
 			}
 			const data = {
 				title: formData.get('title'),
-				categoryID: formData.get('categoryId'),
+				categoryID: formData.get('categoryId') || null,
 				status: formData.get('status'),
-				rowid: formData.get('rowid'),
+				id: formData.get('id'),
 				description: '',
 				thumbnail
 			};

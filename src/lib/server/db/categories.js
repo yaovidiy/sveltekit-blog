@@ -1,7 +1,4 @@
-import { BLOG_DB_PATH } from '$env/static/private';
-import Database from 'better-sqlite3';
-
-const db = new Database(BLOG_DB_PATH);
+import { db } from './db';
 
 /**
  * @typedef {Object} Category
@@ -15,9 +12,7 @@ const db = new Database(BLOG_DB_PATH);
  */
 export async function getAllCategories() {
 	try {
-		const sql = `SELECT rowid, name FROM categories`;
-		const prepare = db.prepare(sql);
-		const res = prepare.all();
+		const res = await db.category.findMany();
 
 		return res;
 	} catch (err) {
@@ -32,8 +27,11 @@ export async function getAllCategories() {
  */
 export async function addCategory(name) {
 	try {
-		const sql = 'INSERT INTO categories (name) VALUES (?)';
-		db.prepare(sql).run(name);
+		await db.category.create({
+			data: {
+				name: name
+			}
+		});
 
 		return true;
 	} catch (err) {
@@ -49,8 +47,14 @@ export async function addCategory(name) {
  */
 export async function editCategory(data) {
 	try {
-		const sql = 'UPDATE categories SET name = @name WHERE rowid = @rowid';
-		db.prepare(sql).run(data);
+		await db.category.update({
+			where: {
+				id: data.id
+			},
+			data: {
+				name: data.name
+			}
+		});
 
 		return true;
 	} catch (err) {
@@ -65,8 +69,11 @@ export async function editCategory(data) {
  */
 export async function getOneCategory(id) {
 	try {
-		const sql = 'SELECT rowid, name FROM categories WHERE rowid = ?';
-		const res = db.prepare(sql).get(id);
+		const res = await db.category.findUnique({
+			where: {
+				id: id
+			}
+		});
 
 		return res;
 	} catch (err) {
@@ -83,8 +90,8 @@ export async function deleteCategory(id) {
 	try {
 		const deleteSql = 'DELETE FROM categories WHERE rowid = ?';
 		db.prepare(deleteSql).run(id);
-    const updateArticleSQL = 'UPDATE articles SET categoryID = null WHERE categoryID = ?';
-    db.prepare(updateArticleSQL).run(id);
+		const updateArticleSQL = 'UPDATE articles SET categoryID = null WHERE categoryID = ?';
+		db.prepare(updateArticleSQL).run(id);
 
 		return true;
 	} catch (err) {

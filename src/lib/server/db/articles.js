@@ -1,7 +1,4 @@
-import { BLOG_DB_PATH } from '$env/static/private';
-import Database from 'better-sqlite3';
-
-const db = new Database(BLOG_DB_PATH);
+import { db } from './db';
 
 /**
  * @typedef {Object} ArticleType
@@ -19,11 +16,15 @@ const db = new Database(BLOG_DB_PATH);
  */
 export async function getAllArticles() {
 	try {
-		const sql = `SELECT a.rowid, title, categoryID, status, c.name as category, thumbnail FROM articles AS a LEFT JOIN categories AS c ON a.categoryID = c.rowid`;
-
-		const prepare = db.prepare(sql);
-
-		const res = prepare.all();
+		const res = await db.article.findMany({
+			include: {
+				category: {
+					select: {
+						name: true
+					}
+				}
+			}
+		});
 
 		return res;
 	} catch (err) {
@@ -39,10 +40,15 @@ export async function getAllArticles() {
  */
 export async function addArticle(data) {
 	try {
-		const sql =
-			'INSERT INTO articles (title, categoryID, status, thumbnail) VALUES (@title, @categoryID, @status, @thumbnail)';
-		const prepare = db.prepare(sql);
-		prepare.run(data);
+		await db.article.create({
+			data: {
+				title: data.title,
+				categoryId: data.categoryID,
+				status: data.status,
+				description: data.description,
+				thumbnail: data.thumbnail
+			}
+		});
 
 		return true;
 	} catch (err) {
@@ -58,9 +64,18 @@ export async function addArticle(data) {
  */
 export async function updateOneArticle(data) {
 	try {
-		const sql =
-			'UPDATE articles SET title = @title, thumbnail = @thumbnail, status = @status, categoryID = @categoryID, description = @description WHERE rowid = @rowid';
-		db.prepare(sql).run(data);
+		await db.article.update({
+			where: {
+				id: data.id
+			},
+			data: {
+				title: data.title,
+				categoryId: data.categoryID,
+				description: data.description,
+				status: data.status,
+				thumbnail: data.thumbnail
+			}
+		});
 
 		return true;
 	} catch (err) {
@@ -76,10 +91,13 @@ export async function updateOneArticle(data) {
  */
 export async function getOneArticle(id) {
 	try {
-		const sql = `SELECT rowid, * FROM articles WHERE rowid = ?`;
-		const result = db.prepare(sql).get(id);
+		const res = await db.article.findUnique({
+			where: {
+				id: id
+			}
+		});
 
-		return result;
+		return res;
 	} catch (err) {
 		console.log(err);
 		return null;

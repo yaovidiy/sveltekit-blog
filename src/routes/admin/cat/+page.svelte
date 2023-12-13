@@ -29,11 +29,11 @@
 				<tbody>
 					{#each data.categories as category}
 						<tr>
-							<td><a href="/admin/cat/edit/{category.rowid}">{category.rowid}</a></td>
+							<td><a href="/admin/cat/edit/{category.id}">{category.id}</a></td>
 							<td>{category.name}</td>
 							<td>
 								<form action="?/deleteCategory" method="post" class="deleteForm">
-									<input type="hidden" name="rowid" value={category.rowid} />
+									<input type="hidden" name="id" value={category.id} />
 									<button class="icon" href="!#">
 										<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"
 											><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->

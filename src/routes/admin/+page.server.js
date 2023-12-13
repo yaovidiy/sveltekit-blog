@@ -1,5 +1,4 @@
 import { auth } from '$lib/server/lucia';
-import { dbExist } from '$lib/server/db/init';
 import { getAllArticles, deleteArticle } from '$lib/server/db/articles.js';
 import { fail, redirect } from '@sveltejs/kit';
 
@@ -7,13 +6,11 @@ export const load = async ({ locals }) => {
 	const session = await locals.auth.validate();
 	if (!session) throw redirect(302, '/signin');
 
-	const inited = await dbExist();
 	let allArticles = await getAllArticles();
 
 	return {
 		userId: session.user.userId,
 		username: session.user.username,
-		inited,
 		articles: allArticles,
 	};
 };

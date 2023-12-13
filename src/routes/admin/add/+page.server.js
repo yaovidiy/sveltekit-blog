@@ -16,13 +16,16 @@ export const actions = {
 		try {
 			const formData = await request.formData();
 			const uploadedFile = formData.get('image');
-			const filename = `static/uploads/${crypto.randomUUID()}${extname(uploadedFile?.name)}`;
-			await writeFile(filename, Buffer.from(await uploadedFile?.arrayBuffer()));
+			let filename = null;
+			if (uploadedFile) {
+				filename = `static/uploads/${crypto.randomUUID()}${extname(uploadedFile?.name)}`;
+				await writeFile(filename, Buffer.from(await uploadedFile?.arrayBuffer()));
+			}
 			const data = {
 				title: formData.get('title'),
-				categoryID: formData.get('categoryId'),
-				status: formData.get('status'),
-				thumbnail: filename.replace('static/', '')
+				categoryID: isNaN(formData.get('categoryId')) ? null : parseInt(formData.get('categoryId')),
+				status: parseInt(formData.get('status')),
+				thumbnail: filename && filename.replace('static/', '')
 			};
 			const res = await addArticle(data);
 

@@ -37,9 +37,9 @@
 						id="floatingSelect"
 						aria-label="Категорія статті"
 					>
-						<option selected>Оберіть категорію</option>
+						<option value="" selected>Оберіть категорію</option>
 						{#each data.categories as category}
-							<option value={category.rowid}>{category.name}</option>
+							<option value={category.id}>{category.name}</option>
 						{/each}
 					</select>
 					<label for="floatingSelect">Категорія</label>

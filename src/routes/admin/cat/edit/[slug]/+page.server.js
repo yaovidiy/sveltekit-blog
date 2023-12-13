@@ -2,7 +2,7 @@ import { editCategory, getOneCategory } from '$lib/server/db/categories.js';
 
 export async function load({ params }) {
 	try {
-		const category = await getOneCategory(params.slug);
+		const category = await getOneCategory(parseInt(params.slug));
 
     return {
       category

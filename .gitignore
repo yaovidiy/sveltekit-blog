@@ -11,3 +11,4 @@ static/uploads/*
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+.vercel

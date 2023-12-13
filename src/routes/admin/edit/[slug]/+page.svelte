@@ -91,7 +91,7 @@
 						>Не активна</label
 					>
 					<input type="hidden" name="description" value="Some value" />
-					<input type="hidden" name="rowid" value={data?.article?.rowid} />
+					<input type="hidden" name="id" value={data?.article?.id} />
 				</div>
 
 				<button class="btn btn-primary w-100">Оновити</button>
