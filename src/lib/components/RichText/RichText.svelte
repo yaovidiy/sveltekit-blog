@@ -6,7 +6,6 @@
 
 	if (browser) {
 		document.addEventListener('trix-attachment-add', async (e) => {
-
 			const formData = new FormData();
 			formData.set('file', e.attachment.attachment.file);
 			const resp = await fetch('/api/upload-file', {
@@ -18,6 +17,8 @@
 			e.attachment.attachment.setAttributes(attributes);
 		});
 	}
+
+	export let defaultValue = '';
 </script>
 
 <svelte:head>
@@ -27,7 +28,7 @@
 {#await ComponentConstructor}
 	<p>No data here</p>
 {:then module}
-	<input type="hidden" name="description" id="trix" />
+	<input type="hidden" value={defaultValue} name="description" id="trix" />
 	<trix-editor class="trix-content" input="trix" />
 {/await}
 

@@ -1,4 +1,6 @@
 <script>
+	import RichText from '$lib/components/RichText/RichText.svelte';
+
 	export let data;
 	export let form;
 
@@ -31,7 +33,7 @@
 				</div>
 				<div class="form-floating mb-3">
 					<select
-						value={data.article.categoryID}
+						value={data.article.categoryId}
 						name="categoryId"
 						class="form-select"
 						id="floatingSelect"
@@ -39,7 +41,7 @@
 					>
 						<option selected>Оберіть категорію</option>
 						{#each data.categories as category}
-							<option value={category.rowid}>{category.name}</option>
+							<option value={category.id}>{category.name}</option>
 						{/each}
 					</select>
 					<label for="floatingSelect">Категорія</label>
@@ -47,7 +49,7 @@
 				<div class="mb-3 d-flex gap-2 justify-content-center align-items-center">
 					{#if data.article.thumbnail && !isReplacingImage}
 						<img
-							src={`/${data.article.thumbnail}`}
+							src={`${data.article.thumbnail}`}
 							width="120"
 							height="50"
 							alt={`мініатюра ${data.article.title}`}
@@ -62,6 +64,9 @@
 						<label for="image" class="form-label mb-0">Мініатюра</label>
 						<input class="form-control" accept="image/*" name="image" type="file" id="image" />
 					{/if}
+				</div>
+				<div class="mb-3">
+					<RichText defaultValue={data.article.description} />
 				</div>
 				<div class="mb-3 row gap-2 pe-3 ps-3">
 					<h5 class="col-12 text-center">Статус</h5>

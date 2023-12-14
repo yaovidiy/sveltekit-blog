@@ -1,7 +1,6 @@
-import { writeFile } from 'node:fs/promises';
-import { extname } from 'path';
 import { getOneArticle, updateOneArticle } from '$lib/server/db/articles.js';
 import { getAllCategories } from '$lib/server/db/categories.js';
+import UploadImage from '$lib/server/utils/imageUpload.js';
 
 export async function load({ params }) {
 	const articleData = await getOneArticle(parseInt(params.slug));
@@ -18,17 +17,22 @@ export const actions = {
 			const formData = await request.formData();
 			let thumbnail = formData.get('image');
 
-			if (typeof thumbnail !== 'string') {
-				const filename = `static/uploads/${crypto.randomUUID()}${extname(thumbnail?.name)}`;
-				await writeFile(filename, Buffer.from(await thumbnail?.arrayBuffer()));
-				thumbnail = filename.replace('static/', '');
+			if (typeof thumbnail !== 'string' && thumbnail.size) {
+				const { url } = await UploadImage(thumbnail);
+
+				thumbnail = url;
 			}
+
+			if (!thumbnail.size) {
+				thumbnail = null;
+			}
+
 			const data = {
 				title: formData.get('title'),
-				categoryID: formData.get('categoryId') || null,
-				status: formData.get('status'),
-				id: formData.get('id'),
-				description: '',
+				categoryID: isNaN(formData.get('categoryId')) ? null : parseInt(formData.get('categoryId')),
+				status: parseInt(formData.get('status')),
+				id: parseInt(formData.get('id')),
+				description: formData.get('description'),
 				thumbnail
 			};
 			const res = await updateOneArticle(data);
