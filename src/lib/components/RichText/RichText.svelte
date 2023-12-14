@@ -27,7 +27,7 @@
 {#await ComponentConstructor}
 	<p>No data here</p>
 {:then module}
-	<input type="hidden" name="content" id="trix" />
+	<input type="hidden" name="description" id="trix" />
 	<trix-editor class="trix-content" input="trix" />
 {/await}
 

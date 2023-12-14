@@ -77,7 +77,6 @@
 					<label class="btn btn-outline-danger col-12 col-md-5" for="danger-outlined"
 						>Не активна</label
 					>
-					<input type="hidden" name="description" value="Some value" />
 				</div>
 
 				<button class="btn btn-primary w-100">Додати</button>

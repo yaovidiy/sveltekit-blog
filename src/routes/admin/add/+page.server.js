@@ -25,6 +25,7 @@ export const actions = {
 				title: formData.get('title'),
 				categoryID: isNaN(formData.get('categoryId')) ? null : parseInt(formData.get('categoryId')),
 				status: parseInt(formData.get('status')),
+				description: formData.get('description'),
 				thumbnail: filename
 			};
 			const res = await addArticle(data);
