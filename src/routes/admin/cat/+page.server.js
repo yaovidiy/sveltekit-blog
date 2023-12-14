@@ -12,7 +12,7 @@ export const actions = {
 	deleteCategory: async ({ request }) => {
 		try {
 			const formData = await request.formData();
-			const rowid = formData.get('rowid');
+			const rowid = formData.get('id');
 
 			const deleteCat = await deleteCategory(rowid);
 

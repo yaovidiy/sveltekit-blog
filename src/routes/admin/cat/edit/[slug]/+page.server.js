@@ -19,7 +19,7 @@ export const actions = {
 		try {
 			const formData = await request.formData();
 			const data = {
-				rowid: formData.get('rowid'),
+				rowid: formData.get('id'),
 				name: formData.get('name')
 			};
 			const res = await editCategory(data);
