@@ -4,3 +4,5 @@
 
 	inject({ mode: dev ? 'development' : 'production' });
 </script>
+
+<slot />
