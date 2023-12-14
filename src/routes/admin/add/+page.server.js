@@ -16,7 +16,7 @@ export const actions = {
 			const formData = await request.formData();
 			const uploadedFile = formData.get('image');
 			let filename = null;
-			if (uploadedFile) {
+			if (uploadedFile.size) {
 				const { url } = await UploadImage(uploadedFile);
 
 				filename = url;

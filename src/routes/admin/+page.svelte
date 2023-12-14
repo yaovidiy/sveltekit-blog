@@ -1,7 +1,6 @@
 <script>
 	export let data;
 	export let form;
-
 </script>
 
 <div class="container-md pt-5">
@@ -34,14 +33,16 @@
 					{#each data.articles as article}
 						<tr>
 							<td><a href="/admin/edit/{article.id}">{article.id}</a></td>
-							<td
-								><img
-									src={`${article.thumbnail}`}
-									alt={`Мініатюра ${article.title}`}
-									width="100"
-									height="50"
-								/></td
-							>
+							<td>
+								{#if article.thumbnail}
+									<img
+										src={`${article.thumbnail}`}
+										alt={`Мініатюра ${article.title}`}
+										width="100"
+										height="50"
+									/>
+								{/if}
+							</td>
 							<td>{article.title}</td>
 							<td>{article?.category?.name ?? 'Категорія не обрана'}</td>
 							<td style:color={article.status ? 'green' : 'red'}
@@ -53,6 +54,7 @@
 									<button class="icon" href="!#">
 										<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"
 											><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+											<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
 											<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
 											<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
 											<!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
