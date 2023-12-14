@@ -3,6 +3,9 @@
 	export let form;
 </script>
 
+<svelte:head>
+	<title>Адмін панель | Категорії</title>
+</svelte:head>
 <div class="container-md pt-5">
 	{#if form?.deleted}
 		<p class="alert alert-success">Успішно видалено</p>
