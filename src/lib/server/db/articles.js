@@ -111,8 +111,12 @@ export async function getOneArticle(id) {
  */
 export async function deleteArticle(id) {
 	try {
-		const sql = 'DELETE FROM articles WHERE rowid = ?';
-		db.prepare(sql).run(id);
+
+		await db.article.delete({
+			where: {
+				id: id
+			}
+		});
 
 		return true;
 	} catch (err) {

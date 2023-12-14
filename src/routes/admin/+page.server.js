@@ -27,7 +27,7 @@ export const actions = {
 		try {
 			const formData = await request.formData();
 			const rowid = formData.get('id');
-			const res = await deleteArticle(rowid);
+			const res = await deleteArticle(parseInt(rowid));
 
 			return {
 				deleted: res
