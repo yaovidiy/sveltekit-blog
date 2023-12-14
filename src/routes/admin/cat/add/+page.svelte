@@ -1,7 +1,6 @@
 <script>
 	export let form;
 
-	console.log(form);
 </script>
 
 <div class="container-md pt-5">

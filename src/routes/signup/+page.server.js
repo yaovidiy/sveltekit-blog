@@ -52,7 +52,6 @@ export const actions = {
 			if (e.message === 'USER_TABLE_UNIQUE_CONSTRAINT_ERROR') {
 				return fail(400, { message: 'Username already taken' });
 			}
-			console.log(e);
 			return fail(500, { message: 'An unknown error occurred' });
 		}
 

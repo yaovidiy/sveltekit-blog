@@ -88,10 +88,11 @@ export async function getOneCategory(id) {
  */
 export async function deleteCategory(id) {
 	try {
-		const deleteSql = 'DELETE FROM categories WHERE rowid = ?';
-		db.prepare(deleteSql).run(id);
-		const updateArticleSQL = 'UPDATE articles SET categoryID = null WHERE categoryID = ?';
-		db.prepare(updateArticleSQL).run(id);
+		await db.article.delete({
+			where: {
+				id: id
+			}
+		});
 
 		return true;
 	} catch (err) {

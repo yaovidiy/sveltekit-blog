@@ -6,7 +6,6 @@
 
 	if (browser) {
 		document.addEventListener('trix-attachment-add', async (e) => {
-			console.log(e);
 
 			const formData = new FormData();
 			formData.set('file', e.attachment.attachment.file);

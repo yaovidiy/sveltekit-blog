@@ -20,7 +20,6 @@ export const actions = {
 				const { url } = await UploadImage(uploadedFile);
 
 				filename = url;
-				console.log(filename);
 			}
 			const data = {
 				title: formData.get('title'),

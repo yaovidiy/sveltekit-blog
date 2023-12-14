@@ -2,7 +2,6 @@
 	export let data;
 	export let form;
 
-	console.log(data);
 </script>
 
 <div class="container-md pt-5">
