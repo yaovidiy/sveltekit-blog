@@ -1,4 +1,6 @@
 <script>
+	import { page } from '$app/stores';
+
 	export let data;
 </script>
 
@@ -27,10 +29,10 @@
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="/admin">Статті</a>
+					<a class="nav-link" class:active={$page.url.pathname === '/admin'} aria-current="page" href="/admin">Статті</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/admin/cat">Категорії</a>
+					<a class="nav-link" class:active={$page.url.pathname === '/admin/cat'} href="/admin/cat">Категорії</a>
 				</li>
 				<li class="nav-item dropdown">
 					<a
