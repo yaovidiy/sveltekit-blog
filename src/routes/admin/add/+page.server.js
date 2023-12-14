@@ -1,7 +1,6 @@
-import { writeFile } from 'node:fs/promises';
-import { extname } from 'path';
 import { getAllCategories } from '$lib/server/db/categories';
 import { addArticle } from '$lib/server/db/articles.js';
+import UploadImage from '$lib/server/utils/imageUpload.js';
 
 export async function load() {
 	const allCategories = await getAllCategories();
@@ -18,14 +17,16 @@ export const actions = {
 			const uploadedFile = formData.get('image');
 			let filename = null;
 			if (uploadedFile) {
-				filename = `static/uploads/${crypto.randomUUID()}${extname(uploadedFile?.name)}`;
-				await writeFile(filename, Buffer.from(await uploadedFile?.arrayBuffer()));
+				const { url } = await UploadImage(uploadedFile);
+
+				filename = url;
+				console.log(filename);
 			}
 			const data = {
 				title: formData.get('title'),
 				categoryID: isNaN(formData.get('categoryId')) ? null : parseInt(formData.get('categoryId')),
 				status: parseInt(formData.get('status')),
-				thumbnail: filename && filename.replace('static/', '')
+				thumbnail: filename
 			};
 			const res = await addArticle(data);
 
@@ -33,6 +34,7 @@ export const actions = {
 				success: res
 			};
 		} catch (err) {
+			console.log(err);
 			return {
 				success: false
 			};

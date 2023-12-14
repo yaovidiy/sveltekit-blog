@@ -33,6 +33,7 @@ export const actions = {
 				deleted: res
 			};
 		} catch (err) {
+			console.log(err);
 			return {
 				deleted: false
 			};
