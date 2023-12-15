@@ -3,7 +3,7 @@
 
 </script>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<div class="container-lg">
 		<a
 			class="navbar-brand"
