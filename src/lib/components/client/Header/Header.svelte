@@ -4,7 +4,7 @@
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container-lg">
+	<div class="container-md">
 		<a
 			class="navbar-brand"
 			style="font-size: 36px;

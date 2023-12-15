@@ -10,7 +10,7 @@
 </script>
 
 <Header />
-<main class="container-lg mt-5 mb-5">
+<main class="container-md mt-5 mb-5">
 	<slot />
 </main>
 <Footer />
