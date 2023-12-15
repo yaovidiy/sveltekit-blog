@@ -1,4 +1,5 @@
 <script>
+	import Header from '$lib/components/client/Header/Header.svelte';
 	import { dev } from '$app/environment';
 	import { inject } from '@vercel/analytics';
 	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
@@ -7,4 +8,7 @@
 	injectSpeedInsights();
 </script>
 
-<slot />
+<Header />
+<main class="container-lg">
+	<slot />
+</main>
