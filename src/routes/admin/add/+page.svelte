@@ -1,5 +1,5 @@
 <script>
-	import RichText from '$lib/components/RichText/RichText.svelte';
+	import RichText from '$lib/components/admin/RichText/RichText.svelte';
 
 	export let data;
 	export let form;
