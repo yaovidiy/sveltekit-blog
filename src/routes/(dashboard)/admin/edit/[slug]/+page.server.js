@@ -16,15 +16,15 @@ export const actions = {
 		try {
 			const formData = await request.formData();
 			let thumbnail = formData.get('image');
+			
+			if (!thumbnail?.size && typeof thumbnail !== 'string') {
+				thumbnail = null;
+			}
 
-			if (typeof thumbnail !== 'string' && thumbnail.size) {
+			if (typeof thumbnail !== 'string' && thumbnail?.size) {
 				const { url } = await UploadImage(thumbnail);
 
 				thumbnail = url;
-			}
-
-			if (!thumbnail.size) {
-				thumbnail = null;
 			}
 
 			const data = {
@@ -41,6 +41,7 @@ export const actions = {
 				success: res
 			};
 		} catch (err) {
+			console.log(err);
 			return {
 				success: false
 			};

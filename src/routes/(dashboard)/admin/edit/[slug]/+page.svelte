@@ -49,6 +49,7 @@
 				<div class="mb-3 d-flex gap-2 justify-content-center align-items-center">
 					{#if data.article.thumbnail && !isReplacingImage}
 						<img
+							class="img-thumbnail"
 							src={`${data.article.thumbnail}`}
 							width="120"
 							height="50"

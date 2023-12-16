@@ -40,6 +40,7 @@
 							<td>
 								{#if article.thumbnail}
 									<img
+										class="img-thumbnail"
 										src={`${article.thumbnail}`}
 										alt={`Мініатюра ${article.title}`}
 										width="100"
