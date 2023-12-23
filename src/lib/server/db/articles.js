@@ -2,7 +2,7 @@ import { db } from './db';
 
 /**
  * @typedef {Object} ArticleType
- * @property {number} [rowid] - article id can be empty when creating new article
+ * @property {number} [id] - article id can be empty when creating new article
  * @property {string} title
  * @property {number} categoryID - foreng key to categories table
  * @property {number} status - 0 - disabled 1 - active
@@ -12,7 +12,7 @@ import { db } from './db';
 
 /**
  *
- * @returns {ArticleType[]}
+ * @returns {ArticleType[] | []}
  */
 export async function getAllArticles() {
 	try {
@@ -23,6 +23,69 @@ export async function getAllArticles() {
 						name: true
 					}
 				}
+			}
+		});
+
+		return res;
+	} catch (err) {
+		console.log(err);
+		return [];
+	}
+}
+
+/**
+ * 
+ * @returns {number} - total amount of the articles
+ */
+export async function countArticles() {
+	try {
+		const res = await db.article.count();
+
+		return res;
+	} catch(err) {
+		console.log(err);
+		return 0;
+	}
+}
+
+/**
+ *
+ * @param {number} take - amount of articles to laod at first display
+ * @returns {ArticleType[] | []}
+ */
+export async function getFirstArticles(take) {
+	try {
+		const res = await db.article.findMany({
+			take: take,
+			include: {
+				category: {
+					select: {
+						name: true
+					}
+				}
+			},
+			orderBy: {
+				id: 'desc'
+			}
+		});
+
+		return res;
+	} catch (err) {
+		console.log(err);
+		return [];
+	}
+}
+
+export async function loadNextArticlesByCursor(take, lastId) {
+	try {
+		const res = await db.article.findMany({
+			take: take,
+			skip: 1,
+			cursor: {
+				id: lastId
+			},
+			orderBy: {
+				id: 'desc'
 			}
 		});
 
@@ -111,7 +174,6 @@ export async function getOneArticle(id) {
  */
 export async function deleteArticle(id) {
 	try {
-
 		await db.article.delete({
 			where: {
 				id: id
