@@ -1,18 +1,8 @@
 import { db } from './db';
 
 /**
- * @typedef {Object} ArticleType
- * @property {number} [id] - article id can be empty when creating new article
- * @property {string} title
- * @property {number} categoryID - foreng key to categories table
- * @property {number} status - 0 - disabled 1 - active
- * @property {string} [description] - can be empty
- * @property {string} [thumbnail]
- */
-
-/**
  *
- * @returns {ArticleType[] | []}
+ * @returns {import('$lib/types').Article[]}
  */
 export async function getAllArticles() {
 	try {
@@ -34,7 +24,7 @@ export async function getAllArticles() {
 }
 
 /**
- * 
+ *
  * @returns {number} - total amount of the articles
  */
 export async function countArticles() {
@@ -42,7 +32,7 @@ export async function countArticles() {
 		const res = await db.article.count();
 
 		return res;
-	} catch(err) {
+	} catch (err) {
 		console.log(err);
 		return 0;
 	}
@@ -51,7 +41,7 @@ export async function countArticles() {
 /**
  *
  * @param {number} take - amount of articles to laod at first display
- * @returns {ArticleType[] | []}
+ * @returns {import('$lib/types').Article[]}
  */
 export async function getFirstArticles(take) {
 	try {
@@ -76,6 +66,12 @@ export async function getFirstArticles(take) {
 	}
 }
 
+/**
+ *
+ * @param {number} take
+ * @param {number} lastId
+ * @returns {import('$lib/types').Article[]}
+ */
 export async function loadNextArticlesByCursor(take, lastId) {
 	try {
 		const res = await db.article.findMany({
@@ -98,7 +94,7 @@ export async function loadNextArticlesByCursor(take, lastId) {
 
 /**
  *
- * @param {ArticleType} data
+ * @param {import('$lib/types').Article} data
  * @returns {boolean}
  */
 export async function addArticle(data) {
@@ -122,7 +118,7 @@ export async function addArticle(data) {
 
 /**
  *
- * @param {ArticleType} data
+ * @param {import('$lib/types').Article} data
  * @returns {boolean}
  */
 export async function updateOneArticle(data) {
@@ -150,7 +146,7 @@ export async function updateOneArticle(data) {
 /**
  *
  * @param {number} id
- * @returns {ArticleType}
+ * @returns {import('$lib/types').Article}
  */
 export async function getOneArticle(id) {
 	try {
