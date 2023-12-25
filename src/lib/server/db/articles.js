@@ -112,6 +112,7 @@ export async function addArticle(data) {
 				categoryId: data.categoryID,
 				status: data.status,
 				description: data.description,
+				shortDesc: data.shortDesc,
 				thumbnail: data.thumbnail,
 				createdAt: new Date(),
 				updatedAt: new Date()
@@ -140,6 +141,7 @@ export async function updateOneArticle(data) {
 				title: data.title,
 				categoryId: data.categoryID,
 				description: data.description,
+				shortDesc: data.shortDesc,
 				status: data.status,
 				thumbnail: data.thumbnail,
 				updatedAt: new Date()

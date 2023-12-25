@@ -32,6 +32,7 @@ export const actions = {
 				categoryID: isNaN(formData.get('categoryId')) ? null : parseInt(formData.get('categoryId')),
 				status: parseInt(formData.get('status')),
 				id: parseInt(formData.get('id')),
+				shortDesc: formData.get('shortDesc'),
 				description: formData.get('description'),
 				thumbnail
 			};

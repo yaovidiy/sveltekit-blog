@@ -24,7 +24,7 @@
 						name="title"
 						class="form-control"
 						id="title"
-						placeholder="MyCoolUserName"
+						placeholder="Title"
 						required
 					/>
 					<label for="title">Заголовок</label>
@@ -47,6 +47,10 @@
 				<div class="mb-3">
 					<label for="image" class="form-label">Мініатюра</label>
 					<input class="form-control" accept="image/*" name="image" type="file" id="image" />
+				</div>
+				<div class="form-floating mb-3">
+					<textarea class="form-control" placeholder="Короткий опис" id="shortDesc" name="shortDesc" style="height: 100px"></textarea>
+					<label for="shortDesc">Короткий опис</label>
 				</div>
 				<div class="mb-3">
 					<RichText></RichText>

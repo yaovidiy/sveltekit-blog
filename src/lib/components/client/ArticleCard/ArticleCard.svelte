@@ -1,7 +1,7 @@
 <script>
 	export let img = '';
 	export let title = '';
-	export let description = '';
+	export let shortDesc = '';
 	export let slug = '/';
 	export let createdAt = '';
 	export let category = '';
@@ -10,7 +10,7 @@
 		let data = new Date();
 
 		if (date) {
-			data = date;
+			data = new Date(date);
 		}
 
 		return new Intl.DateTimeFormat('uk', { dateStyle: 'medium' }).format(data);
@@ -20,8 +20,8 @@
 <a href={`article/${slug}`} class="card text-decoration-none">
 	<img src={img} alt={`${title} | article image`} class="card-img-top" />
 	<div class="card-body">
-		<h5 class="card-title">{title}</h5>
-		<p class="card-text">{description}</p>
+		<h5 class="card-title fw-bold">{title}</h5>
+		<p class="card-text">{shortDesc ?? ''}</p>
 		<p class="card-text d-flex justify-content-between">
 			<span class="badge text-bg-primary">{category.name}</span>
 			<small class="text-body-secondary">{showReadableDate(createdAt)}</small>

@@ -66,6 +66,16 @@
 						<input class="form-control" accept="image/*" name="image" type="file" id="image" />
 					{/if}
 				</div>
+				<div class="form-floating mb-3">
+					<textarea
+						class="form-control"
+						placeholder="Короткий опис"
+						id="shortDesc"
+						name="shortDesc"
+						style="height: 100px">{data.article.shortDesc ?? ''}</textarea
+					>
+					<label for="shortDesc">Короткий опис</label>
+				</div>
 				<div class="mb-3">
 					<RichText defaultValue={data.article.description} />
 				</div>
