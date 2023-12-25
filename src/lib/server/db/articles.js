@@ -80,6 +80,13 @@ export async function loadNextArticlesByCursor(take, lastId) {
 			cursor: {
 				id: lastId
 			},
+			include: {
+				category: {
+					select: {
+						name: true
+					}
+				}
+			},
 			orderBy: {
 				id: 'desc'
 			}

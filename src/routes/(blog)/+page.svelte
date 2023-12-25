@@ -1,14 +1,17 @@
 <script>
 	import ArticleCard from '$lib/components/client/ArticleCard/ArticleCard.svelte';
+	import Button from '$lib/components/client/Basic/Button/Button.svelte';
 
 	export let data;
 
 	let { articles, total } = data;
+	let loading = false;
 
-	$: lastArticle = articles.slice(-1);
+	let lastArticleId = articles.slice(-1)[0].id;
 
 	async function fetchMore(lastId) {
 		try {
+			loading = true;
 			const resp = await fetch('/api/load-more', {
 				method: 'POST',
 				body: JSON.stringify({
@@ -19,8 +22,11 @@
 			const res = await resp.json();
 
 			articles = articles.concat(res);
+			lastArticleId = articles.slice(-1)[0].id;
 		} catch (err) {
 			console.error(err);
+		} finally {
+			loading = false;
 		}
 	}
 </script>
@@ -35,9 +41,9 @@
 	</div>
 	{#if total !== articles.length}
 		<div class="row mt-5 align-items-center justify-content-center">
-			<button class="btn btn-primary w-25" on:click={() => fetchMore(lastArticle.id)}
-				>Load more</button
-			>
+			<Button clickEvent={() => fetchMore(lastArticleId)} isLoading={loading} isDisabled={loading} classes={`w-25`}>
+				Load more
+			</Button>
 		</div>
 	{/if}
 </div>
