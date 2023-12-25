@@ -18,7 +18,9 @@
 </script>
 
 <a href={`article/${slug}`} class="card text-decoration-none">
-	<img src={img} alt={`${title} | article image`} class="card-img-top" />
+	{#if img}
+		<img src={img} alt={`${title} | article image`} class="card-img-top" />
+	{/if}
 	<div class="card-body">
 		<h5 class="card-title fw-bold">{title}</h5>
 		<p class="card-text">{shortDesc ?? ''}</p>
@@ -30,9 +32,9 @@
 </a>
 
 <style>
-  .card-title {
-    transition: color 0.3s;
-  }
+	.card-title {
+		transition: color 0.3s;
+	}
 	.card:hover .card-title {
 		color: var(--bs-primary);
 	}
