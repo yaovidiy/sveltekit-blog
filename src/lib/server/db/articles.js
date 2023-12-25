@@ -165,7 +165,14 @@ export async function getOneArticle(id) {
 		const res = await db.article.findUnique({
 			where: {
 				id: id
-			}
+			},
+			include: {
+				category: {
+					select: {
+						name: true
+					}
+				}
+			},
 		});
 
 		return res;

@@ -31,9 +31,15 @@
 	}
 </script>
 
+<svelte:head>
+	<title>
+		SvelteBlog | Статті
+	</title>
+</svelte:head>
+
 <div class="container-lg">
 	{#if articles.length}
-		<div class="row">
+		<div class="row gap-3">
 			{#each articles as article}
 				<div class="col-12 col-md-6 col-lg-4">
 					<ArticleCard slug={article.id} {...article} img={article.thumbnail} />
