@@ -40,6 +40,9 @@ model Key {
 model Article {
   id          Int       @id @default(autoincrement())
   title       String
+  createdAt   DateTime
+  updatedAt   DateTime
+  shortDesc   String?
   category    Category? @relation(fields: [categoryId], references: [id])
   categoryId  Int?
   status      Int?

@@ -7,7 +7,7 @@
 	let { articles, total } = data;
 	let loading = false;
 
-	let lastArticleId = articles.slice(-1)[0].id;
+	let lastArticleId = articles.slice(-1)[0]?.id;
 
 	async function fetchMore(lastId) {
 		try {
@@ -32,18 +32,27 @@
 </script>
 
 <div class="container-lg">
-	<div class="row">
-		{#each articles as article}
-			<div class="col-12 col-md-6 col-lg-4">
-				<ArticleCard slug={article.id} {...article} img={article.thumbnail} />
-			</div>
-		{/each}
-	</div>
-	{#if total !== articles.length}
-		<div class="row mt-5 align-items-center justify-content-center">
-			<Button clickEvent={() => fetchMore(lastArticleId)} isLoading={loading} isDisabled={loading} classes={`w-25`}>
-				Load more
-			</Button>
+	{#if articles.length}
+		<div class="row">
+			{#each articles as article}
+				<div class="col-12 col-md-6 col-lg-4">
+					<ArticleCard slug={article.id} {...article} img={article.thumbnail} />
+				</div>
+			{/each}
 		</div>
+		{#if total !== articles.length}
+			<div class="row mt-5 align-items-center justify-content-center">
+				<Button
+					clickEvent={() => fetchMore(lastArticleId)}
+					isLoading={loading}
+					isDisabled={loading}
+					classes={`w-25`}
+				>
+					Load more
+				</Button>
+			</div>
+		{/if}
+	{:else}
+		<h3>Тут поки нічого не має!</h3>
 	{/if}
 </div>

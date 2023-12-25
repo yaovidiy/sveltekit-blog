@@ -112,7 +112,9 @@ export async function addArticle(data) {
 				categoryId: data.categoryID,
 				status: data.status,
 				description: data.description,
-				thumbnail: data.thumbnail
+				thumbnail: data.thumbnail,
+				createdAt: new Date(),
+				updatedAt: new Date()
 			}
 		});
 
@@ -139,7 +141,8 @@ export async function updateOneArticle(data) {
 				categoryId: data.categoryID,
 				description: data.description,
 				status: data.status,
-				thumbnail: data.thumbnail
+				thumbnail: data.thumbnail,
+				updatedAt: new Date()
 			}
 		});
 

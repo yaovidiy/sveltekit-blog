@@ -12,7 +12,7 @@
       font-weight: 600;
       line-height: 24px;
       color: #D97878;"
-			href="/">Blogini</a
+			href="/">SvelteBlog</a
 		>
 		<button
 			class="navbar-toggler mb-3"
